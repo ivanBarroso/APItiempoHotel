@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+.contenedorTiempo
+{
+    width: 550px;
+    height: 250px;
+    padding: 1em;
+    border: solid 1px #878787;
+}
+.contenedor
+{
+    width: 550px;
+    height:250px;
+    position: absolute;
+}
+.ciudad
+{
+    display: block;
+    font-size: x-large !important;
+    font-weight: 600 !important;
+    color: #878787 !important;
+    line-height: 1.2;
+    text-align: left;
+}
+.textoGrisMedio
+{
+    font-weight: lighter !important;
+    color: #878787 !important;
+    display: block;
+}
+.tiempo
+{
+    height: 70px;
+    display: block;
+}
+.imagenTiempo
+{
+    float: left;
+    height: 64px;
+    width: 64px;
+
+}
+.textoTiempo
+{
+    float: left;
+    margin-left: 10px;
+    margin-top: -3px;   
+    font-size: 64px;
+    font-weight: 500 !important;
+    color: #212121 !important;
+}
+.unidadTemperatura
+{
+    float: left;
+    font-size: 16px;
+    margin-top: 6px;
+}
+.resumen
+{
+    float: right;
+    padding-left: 5px;
+    line-height: 22px;
+    padding-top: 2px;
+    min-width: 43%;
+}
+.botones
+{
+    height: 23px;
+    overflow: hidden;
+    padding: 15px 0 9px;
+    background-color: red;
+}
+.noFlotar
+{
+    display: inline;
+    float: left;
+}
+.previsiones
+{
+    margin-bottom: -1px;
+    padding: 0;
+    padding-bottom: 0px;
+    padding-bottom: 1px;
+    cursor: pointer;
+    position: absolute;
+    overflow: hidden;
+    z-index: 0;
+}
+.previsionDia
+{
+    display: inline-block;
+    line-height: 1;
+    text-align: center;
+    font-weight: 13px;
+    height: 90px;
+    width: 73px;
+    background-color: #fcfcfc;
+    border: 1px solid #e9e9e9;
+    border-radius: 1px;
+    padding-top: 7px;   
+    margin: 0;
+    white-space: nowrap;
+}
+.diaPeq
+{
+    display:inline-block;
+    width: 90%;
+    overflow: hidden;
+    line-height: 15px;
+    color: #bababa !important;
+    font-size: normal;
+}
+.iconoPeq
+{
+    display: block;
+    line-height: 1;
+    text-align: center;
+    margin: 1px 10px 0;
+    height: 48px;
+    width: 48px;
+    white-space: nowrap;
+}
+.tempPeq
+{
+    padding-top: 8px;
+    font-weight: normal;
+    line-height: 15px;
+    font-size: 13px;
+    text-align: center;
+    font-weight: 13px;
+    white-space: nowrap;
+}
+.tempPeqMin
+{
+    display: inline-block;
+    padding-right: 5px;
+    color: #878787 !important;
+}
+.tempPeqMax
+{
+    display: inline-block;
+    color: #987f7f !important;
+}
+</style>
+<body>
+    <div class="contenedorTiempo">
+            <div class="contenedor">
+                    <span id="ciudad" class="ciudad">Avila</span>
+                    <span id="fecha" class="textoGrisMedio">martes, 11:00</span>
+                    <span id="condicionTex" class="textoGrisMedio">Nieve</span>
+                    <div class="tiempo">
+                        <img class="imagenTiempo" id="imagenTiempo" src="./iconos/003-cloudy-4.png" alt="icono tiempo">
+                        <span id="temperatura" class="textoTiempo" id="textoTiempo">-12</span>
+                        <span class="unidadTemperatura" id="unidadTemperatura">°C</span>
+                        <div class="resumen">
+                                <span class="textoGrisMedio noFlotar">Humedad&nbsp;</span><span id="humendad" class="textoGrisMedio">20%</span>
+                                <span class="textoGrisMedio noFlotar">Presión&nbsp;</span><span id="presion" class="textoGrisMedio">10</span>
+                                <span class="textoGrisMedio noFlotar">Visibilidad&nbsp;</span><span id="visibilidad" class="textoGrisMedio">10 millas</span>
+                        </div>
+                    </div>
+                    <div class="previsiones">
+                        <div class="previsionDia">
+                            <span id="dia0" class="diaPeq">lun</span>
+                            <img class="iconoPeq" id="icono0" src="./iconos/042-snow.png" alt="icono tiempo">
+                            <div class="tempPeq">
+                                <span id="dia0tempMin"class="tempPeqMin">-12°</span>
+                                <span id="dia0temMax" class="tempPeqMax">-2°</span>
+                            </div>
+                        </div>
+                        <div class="previsionDia">
+                            <span id="dia0" class="diaPeq">lun</span>
+                            <img class="iconoPeq" id="icono0" src="./iconos/043-cloudy.png" alt="icono tiempo">
+                            <div class="tempPeq">
+                                <span id="dia0tempMin"class="tempPeqMin">-12°</span>
+                                <span id="dia0temMax" class="tempPeqMax">-2°</span>
+                            </div>
+                        </div>
+                        <div class="previsionDia">
+                            <span id="dia0" class="diaPeq">lun</span>
+                            <img class="iconoPeq" id="icono0" src="./iconos/050-sun.png" alt="icono tiempo">
+                            <div class="tempPeq">
+                                <span id="dia0tempMin"class="tempPeqMin">-12°</span>
+                                <span id="dia0temMax" class="tempPeqMax">-2°</span>
+                            </div>
+                        </div>
+                        <div class="previsionDia">
+                            <span id="dia0" class="diaPeq">lun</span>
+                            <img class="iconoPeq" id="icono0" src="./iconos/049-clouds.png" alt="icono tiempo">
+                            <div class="tempPeq">
+                                <span id="dia0tempMin"class="tempPeqMin">-12°</span>
+                                <span id="dia0temMax" class="tempPeqMax">-2°</span>
+                            </div>
+                        </div>
+                        <div class="previsionDia">
+                            <span id="dia0" class="diaPeq">lun</span>
+                            <img class="iconoPeq" id="icono0" src="./iconos/042-snow.png" alt="icono tiempo">
+                            <div class="tempPeq">
+                                <span id="dia0tempMin"class="tempPeqMin">-12°</span>
+                                <span id="dia0temMax" class="tempPeqMax">-2°</span>
+                            </div>
+                        </div>
+                        <div class="previsionDia">
+                            <span id="dia0" class="diaPeq">lun</span>
+                            <img class="iconoPeq" id="icono0" src="./iconos/011-night-rain.png" alt="icono tiempo">
+                            <div class="tempPeq">
+                                <span id="dia0tempMin"class="tempPeqMin">-12°</span>
+                                <span id="dia0temMax" class="tempPeqMax">-2°</span>
+                            </div>
+                        </div>
+                        <div class="previsionDia">
+                            <span id="dia0" class="diaPeq">lun</span>
+                            <img class="iconoPeq" id="icono0" src="./iconos/035-windy.png" alt="icono tiempo">
+                            <div class="tempPeq">
+                                <span id="dia0tempMin"class="tempPeqMin">-12°</span>
+                                <span id="dia0temMax" class="tempPeqMax">-2°</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+</body>
+</html>

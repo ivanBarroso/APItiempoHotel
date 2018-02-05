@@ -1,0 +1,218 @@
+body {
+    width: 100%;
+    margin: 0 auto;
+    font-family: Arial;
+}
+#main {
+    width: 20%;
+    position: relative;
+    background-color: #fff;
+    text-align: center;
+}
+
+#btBuscar
+{
+    width: 25%;
+    display: block;
+}
+#inputCiudad
+{
+    width: 25%;
+    display: block;
+    float: left;
+
+}
+h2 {
+    font-weight: bold;
+    color: #003399;
+}
+
+h1 {
+    color: #003399;
+
+}
+
+#map {
+    width: 100%;
+    height: 50%;
+    position: relative;
+    float: left;
+    top:120px;
+
+}
+
+.maps-frame {
+    height: 50%;
+    width: 50%;
+}
+
+<!-- ids que se crean automaticamente en el mapa 
+.kd-tabbed-vert.header-links .kd-tabbutton a {
+    color: #757575;
+    display: inline-block;
+    height: 100%;
+    padding: 0 24px;
+    width: 100%;
+}
+
+.kd-tabbed-vert.header-links .kd-tabbutton {
+padding: 0;
+}
+
+.kd-tabbed-vert.header-links .kd-tabbutton.selected a {
+color: #03a9f4;
+}
+
+.kd-tabbed-vert.header-links .kd-tabbutton a:focus {
+text-decoration: none;
+}
+
+p.top-desc {
+padding: 1em 1em .1em 1em;
+}
+
+p.bottom-desc {
+padding: 0em 1em 1em 1em;
+}
+.contenedorTiempo
+{
+    width: 550px;
+    height: 500px;
+    padding: 1em;
+    border: solid 1px #878787;
+}
+.contenedor
+{
+    width: 550px;
+    height:500px;
+    position: absolute;
+}
+.ciudad
+{
+    display: block;
+    font-size: x-large !important;
+    font-weight: 600 !important;
+    color: #878787 !important;
+    line-height: 1.2;
+    text-align: left;
+}
+.textoGrisMedio
+{
+    font-weight: lighter !important;
+    color: #878787 !important;
+    display: block;
+}
+.tiempo
+{
+    height: 70px;
+    display: block;
+}
+.imagenTiempo
+{
+    float: left;
+    height: 64px;
+    width: 64px;
+
+}
+.textoTiempo
+{
+    float: left;
+    margin-left: 10px;
+    margin-top: -3px;   
+    font-size: 64px;
+    font-weight: 500 !important;
+    color: #212121 !important;
+}
+.unidadTemperatura
+{
+    float: left;
+    font-size: 16px;
+    margin-top: 6px;
+}
+.resumen
+{
+    float: right;
+    padding-left: 5px;
+    line-height: 22px;
+    padding-top: 2px;
+    min-width: 43%;
+}
+.botones
+{
+    height: 23px;
+    overflow: hidden;
+    padding: 15px 0 9px;
+    background-color: red;
+}
+.noFlotar
+{
+    display: inline;
+    float: left;
+    margin-right: 5px;
+}
+.previsiones
+{
+    margin-bottom: -1px;
+    padding: 0;
+    padding-bottom: 0px;
+    padding-bottom: 1px;
+    cursor: pointer;
+    position: absolute;
+    overflow: hidden;
+    z-index: 0;
+}
+.previsionDia
+{
+    display: inline-block;
+    line-height: 1;
+    text-align: center;
+    font-weight: 13px;
+    height: 90px;
+    width: 73px;
+    background-color: #fcfcfc;
+    border: 1px solid #e9e9e9;
+    border-radius: 1px;
+    padding-top: 7px;   
+    margin: 0;
+    white-space: nowrap;
+}
+.diaPeq
+{
+    display:inline-block;
+    width: 90%;
+    overflow: hidden;
+    line-height: 15px;
+    color: #bababa !important;
+    font-size: normal;
+}
+.iconoPeq
+{
+    display: block;
+    line-height: 1;
+    text-align: center;
+    margin: 1px 10px 0;
+    height: 48px;
+    width: 48px;
+    white-space: nowrap;
+}
+.tempPeq
+{
+    padding-top: 8px;
+    font-weight: normal;
+    line-height: 15px;
+    font-size: 13px;
+    text-align: center;
+    font-weight: 13px;
+    white-space: nowrap;
+}
+.tempPeqMin
+{
+    display: inline-block;
+    padding-right: 5px;
+    color: #878787 !important;
+}
+.tempPeqMax
+{
+    display: inline-block;
+    color: #987f7f !important;
+}

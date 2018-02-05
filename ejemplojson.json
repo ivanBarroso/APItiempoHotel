@@ -1,0 +1,149 @@
+{
+    "query": {
+        "count": 1,
+        "created": "2018-02-03T17:34:36Z",
+        "lang": "es-ES",
+        "results": {
+            "channel": {
+                "units": {
+                    "distance": "mi",
+                    "pressure": "in",
+                    "speed": "mph",
+                    "temperature": "F"
+                },
+                "title": "Yahoo! Weather - Nome, AK, US",
+                "link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-2460286/",
+                "description": "Yahoo! Weather for Nome, AK, US",
+                "language": "en-us",
+                "lastBuildDate": "Sat, 03 Feb 2018 08:34 AM AKST",
+                "ttl": "60",
+                "location": {
+                    "city": "Nome",
+                    "country": "United States",
+                    "region": " AK"
+                },
+                "wind": {
+                    "chill": "-2",
+                    "direction": "68",
+                    "speed": "18"
+                },
+                "atmosphere": {
+                    "humidity": "61",
+                    "pressure": "1026.0",
+                    "rising": "0",
+                    "visibility": "16.1"
+                },
+                "astronomy": {
+                    "sunrise": "10:39 am",
+                    "sunset": "5:54 pm"
+                },
+                "image": {
+                    "title": "Yahoo! Weather",
+                    "width": "142",
+                    "height": "18",
+                    "link": "http://weather.yahoo.com",
+                    "url": "http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif"
+                },
+                "item": {
+                    "title": "Conditions for Nome, AK, US at 07:00 AM AKST",
+                    "lat": "64.499474",
+                    "long": "-165.405792",
+                    "link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-2460286/",
+                    "pubDate": "Sat, 03 Feb 2018 07:00 AM AKST",
+                    "condition": {
+                        "code": "31",
+                        "date": "Sat, 03 Feb 2018 07:00 AM AKST",
+                        "temp": "12",
+                        "text": "Clear"
+                    },
+                    "forecast": [
+                        {
+                            "code": "32",
+                            "date": "03 Feb 2018",
+                            "day": "Sat",
+                            "high": "14",
+                            "low": "8",
+                            "text": "Sunny"
+                        },
+                        {
+                            "code": "32",
+                            "date": "04 Feb 2018",
+                            "day": "Sun",
+                            "high": "8",
+                            "low": "4",
+                            "text": "Sunny"
+                        },
+                        {
+                            "code": "34",
+                            "date": "05 Feb 2018",
+                            "day": "Mon",
+                            "high": "16",
+                            "low": "4",
+                            "text": "Mostly Sunny"
+                        },
+                        {
+                            "code": "23",
+                            "date": "06 Feb 2018",
+                            "day": "Tue",
+                            "high": "25",
+                            "low": "17",
+                            "text": "Breezy"
+                        },
+                        {
+                            "code": "23",
+                            "date": "07 Feb 2018",
+                            "day": "Wed",
+                            "high": "24",
+                            "low": "20",
+                            "text": "Breezy"
+                        },
+                        {
+                            "code": "23",
+                            "date": "08 Feb 2018",
+                            "day": "Thu",
+                            "high": "26",
+                            "low": "23",
+                            "text": "Breezy"
+                        },
+                        {
+                            "code": "26",
+                            "date": "09 Feb 2018",
+                            "day": "Fri",
+                            "high": "27",
+                            "low": "23",
+                            "text": "Cloudy"
+                        },
+                        {
+                            "code": "28",
+                            "date": "10 Feb 2018",
+                            "day": "Sat",
+                            "high": "26",
+                            "low": "11",
+                            "text": "Mostly Cloudy"
+                        },
+                        {
+                            "code": "32",
+                            "date": "11 Feb 2018",
+                            "day": "Sun",
+                            "high": "9",
+                            "low": "-3",
+                            "text": "Sunny"
+                        },
+                        {
+                            "code": "34",
+                            "date": "12 Feb 2018",
+                            "day": "Mon",
+                            "high": "22",
+                            "low": "-5",
+                            "text": "Mostly Sunny"
+                        }
+                    ],
+                    "description": "<![CDATA[<img src=\"http://l.yimg.com/a/i/us/we/52/31.gif\"/>\n<BR />\n<b>Current Conditions:</b>\n<BR />Clear\n<BR />\n<BR />\n<b>Forecast:</b>\n<BR /> Sat - Sunny. High: 14Low: 8\n<BR /> Sun - Sunny. High: 8Low: 4\n<BR /> Mon - Mostly Sunny. High: 16Low: 4\n<BR /> Tue - Breezy. High: 25Low: 17\n<BR /> Wed - Breezy. High: 24Low: 20\n<BR />\n<BR />\n<a href=\"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-2460286/\">Full Forecast at Yahoo! Weather</a>\n<BR />\n<BR />\n<BR />\n]]>",
+                    "guid": {
+                        "isPermaLink": "false"
+                    }
+                }
+            }
+        }
+    }
+}
