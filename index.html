@@ -96,7 +96,7 @@
                 $('.contenedor').append(divCiudad, divFecha, divCondicionText, divTiempo, divPrevisiones);
 
                 
-                var imgImagenTiempo = $("<img>").addClass("imagenTiempo").attr("src", "./iconos/003-cloudy-4.png");
+                var imgImagenTiempo = $("<div>").addClass("imagenTiempo").addClass(arrayIconos[condicionCod]);
                 var spTemperatura = $("<span>").addClass("textoTiempo").text(temperatura);
                 var spUnidadTemeperatura = $("<span>").addClass("unidadTemperatura").text("°C");
                 
@@ -115,7 +115,7 @@
 
                     var spdiaPeq = $("<span>").addClass("diaPeq").text(prevision[i].dia);
                     //var imgIconoPeq = $("<img>").addClass("iconoPeq").attr("src", "./iconos/003-cloudy-4.png");
-                    var imgIconoPeq = $("<div>").addClass("iconoPeq").addClass("vect002-drop");
+                    var imgIconoPeq = $("<div>").addClass("iconoPeq").addClass(arrayIconos[prevision[i].codigo]);
                     var divTemPeq = $("<div>").addClass("tempPeq").attr("id", "tempPeq"+i);
 
                     $(("#previsionDia"+i)).append(spdiaPeq, imgIconoPeq, divTemPeq);
@@ -123,6 +123,19 @@
                     var spdiaTempMin = $("<span>").addClass("tempPeqMin").text(prevision[i].minimaT+"°");
                     var spdiaTemMax = $("<span>").addClass("tempPeqMax").text(prevision[i].maximaT+"°");
                     $("#tempPeq"+i).append(spdiaTempMin, spdiaTemMax);
+                    $( "#previsionDia"+i ).on( {
+                            mouseenter: function(){
+                                $(this).css("color", "red").slideUp(1000).slideDown(600); 
+                                $(this).css("background-color", "#123456");
+                                
+                            },
+                            mouseleave: function(){
+                                $(this).css("background-color", "#fff");
+                            },
+                            click: function(){
+                                $(this).css("background-color", "yellow");
+                            }
+                        });
                 }
                 
                 

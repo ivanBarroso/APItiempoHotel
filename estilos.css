@@ -154,12 +154,12 @@ padding: 0em 1em 1em 1em;
 {
     margin-bottom: -1px;
     padding: 0;
-    padding-bottom: 0px;
     padding-bottom: 1px;
     cursor: pointer;
     position: absolute;
     overflow: hidden;
-    z-index: 0;
+    width: 100%;
+    margin: 0 auto;
 }
 .previsionDia
 {
@@ -167,14 +167,15 @@ padding: 0em 1em 1em 1em;
     line-height: 1;
     text-align: center;
     font-weight: 13px;
-    height: 90px;
-    width: 73px;
+    height: 100%;
+    width: 13%;
     background-color: #fcfcfc;
     border: 1px solid #e9e9e9;
     border-radius: 1px;
     padding-top: 7px;   
     margin: 0;
     white-space: nowrap;
+    margin-left: 0.3em;
 }
 .diaPeq
 {
