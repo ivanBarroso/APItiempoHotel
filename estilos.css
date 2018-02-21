@@ -504,9 +504,24 @@ ul, ol {
 
 @media screen and (max-width: 600px){
 
-    body{
-
-        background-color: red;
+    body
+    {
+        background-color: #003399;
+    }
+    .iconoPeq
+    {
+        display: block;
+        line-height: 1;
+        text-align: center;
+        margin: 1px 5px 0;
+        height: 28px;
+        width: 28px;
+        white-space: nowrap;
+        margin: auto;
+    }
+    .diaPeq
+    {
+        font-size: small;
     }
 
 }
