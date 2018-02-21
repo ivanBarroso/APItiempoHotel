@@ -32,7 +32,7 @@
         {
             if (peticionHttp.readyState == 4 && peticionHttp.status == 200) 
             {
-                
+                $("#btBuscar").text("Buscar");
                 $(".contenedor").remove();
                 
                 var respuesta_json = peticionHttp.responseText;
@@ -167,11 +167,76 @@
             title: 'Hello World!'
         });
     }
-    $(document).ready(function(){
 
+    //geolocalizacion
+
+    function localizarUsuario   (){
+	if (navigator.geolocation)
+	{
+		navigator.geolocation.getCurrentPosition(function(objPosition)
+		{
+			var lon = objPosition.coords.longitude;
+			var lat = objPosition.coords.latitude;
+
+
+			var latlng = new google.maps.LatLng(lat, lon);
+			geocoder = new google.maps.Geocoder();
+			geocoder.geocode({"latLng": latlng}, function(results, status)
+			{
+				if (status == google.maps.GeocoderStatus.OK)
+				{
+					if (results[0])
+					{
+                        $("#inputCiudad").val(results[2].formatted_address+"");
+                        consultarCiudad(results[2].formatted_address);
+                        
+                    }
+					else
+					{
+						alert("Direccion no encontrada")
+					}
+				}
+				else
+				{
+					alert("Debes aceptar los permisos de geolocalización")
+				}
+
+			});
+
+		}, function(objPositionError)
+		{
+			switch (objPositionError.code)
+			{
+				case objPositionError.PERMISSION_DENIED:
+					content.innerHTML = "No se ha permitido el acceso a la posición del usuario.";
+				break;
+				case objPositionError.POSITION_UNAVAILABLE:
+					content.innerHTML = "No se ha podido acceder a la información de su posición.";
+				break;
+				case objPositionError.TIMEOUT:
+					content.innerHTML = "El servicio ha tardado demasiado tiempo en responder.";
+				break;
+				default:
+					content.innerHTML = "Error desconocido.";
+			}
+		}, {
+			maximumAge: 75000,
+			timeout: 15000
+		});
+	}
+	else
+	{
+		content.innerHTML = "Su navegador no soporta la API de geolocalización.";
+	}
+    };
+    //fin de geolocalizacion
+
+    $(document).ready(function(){
         $(document).ready(function(){
             $("#btBuscar").click(function(){
+                $("#btBuscar").text("Buscando...");
                 consultarCiudad($("#inputCiudad").val())
+                return false;
             });
             $(".paisEur").click(function(){
                 consultarCiudad($(this).text());
@@ -181,8 +246,10 @@
                 
                 return false;
             });
-            $("#contacto").click(function(){
+            $("#localizame").click(function(){
+                localizarUsuario();
                 
+                return false;
             });
         });
 });
@@ -247,13 +314,20 @@
                     </ul>
                 </li>
                 <li><a id="contacto" href="mailto:barrosojimenezivan@gmail.com?subject=Te%20quiero%20comprar%20la%20pagina&body=1000%20€.">Contacto</a></li>
-                </ul>
+                <li><a id="localizame" href="">Mi localización</a>
+                    <li><section class="webdesigntuts-workshop">
+                            <form action="" method="">		    
+                                <input id="inputCiudad" type="search" placeholder="Buscar...">		    	
+                                <button id="btBuscar">Buscar</button>
+                            </form>
+                        </section></li>
+            </ul>
         </div>
     <div id="buscador">
-            <input id="inputCiudad" type="text" name="fname" placeholder="Buscar aqu&iacute;..." required   >
-            <button id="btBuscar">Buscar</button><br>
+
     </div>    
     <div class="contenedorTiempo" id="contenedorTiempo"> 
+    <div id="resultado"> 
     </div>
         
         
