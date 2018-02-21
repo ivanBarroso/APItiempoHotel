@@ -94,7 +94,7 @@ padding: 0em 1em 1em 1em;
 }
 .tiempo
 {
-    height: 18%;
+    height: 16%;
     display: block;
     margin-bottom: 5%;
 }
@@ -525,13 +525,32 @@ ul, ol {
     {
         font-size: small;
     }
+    #previsionDia6{
+        visibility:hidden;
+    }
     #previsionDia7{
         visibility:hidden;
     }
     .tiempo
     {
-        height: 19%;
+        height: 18%;
         display: block;
+    }.previsionDia
+    {
+        display: inline-block;
+        line-height: 1;
+        text-align: center;
+        font-weight: 13px;
+        height: 100%;
+        width: 18%;
+        background-color: #fcfcfc;
+        border: 1px solid #e9e9e9;
+        border-radius: 1px;
+        padding-top: 7px;   
+        padding-bottom: 17px;
+        margin: 0;
+        white-space: nowrap;
+        margin-left: 0.3em;
     }
 
 }
