@@ -214,14 +214,13 @@ padding: 0em 1em 1em 1em;
 
 * {
     margin:0px;
+    padding: 0px;
 }
 
 #header {
     width: 100%;
-    float: none;
     transition: all .5s ease;
     background: url("espacio.jpg");
-    margin:auto;
     height: 150px;
     font-family:Arial, Helvetica, sans-serif;
 }
@@ -246,7 +245,6 @@ ul, ol {
 
 .nav li a {
     z-index: 200;
-
     background-color:#000;
     color:#fff;
     text-decoration:none;
@@ -272,18 +270,16 @@ ul, ol {
 
 .nav li ul li {
     position:relative;
-    max-width: 300px;
+    max-width: 200px;
 }
 
 .nav li ul li ul {
-    right:-140px;
     top:0px;
-    width: 20%;
+    width: 29%;
 }
 
 
 .webdesigntuts-workshop {
-	background: #151515;
 	position: absolute;
 	text-align: center;
 }
@@ -297,7 +293,7 @@ ul, ol {
 }
 
 .webdesigntuts-workshop:before {
-	background: #444;
+
 	background: -webkit-linear-gradient(left, #151515, #444, #151515);
 	background: -moz-linear-gradient(left, #151515, #444, #151515);
 	background: -o-linear-gradient(left, #151515, #444, #151515);
@@ -317,15 +313,7 @@ ul, ol {
 }
 
 .webdesigntuts-workshop form {
-	background: #111;
-	background: -webkit-linear-gradient(#1b1b1b, #111);
-	background: -moz-linear-gradient(#1b1b1b, #111);
-	background: -o-linear-gradient(#1b1b1b, #111);
-	background: -ms-linear-gradient(#1b1b1b, #111);
-	background: linear-gradient(#1b1b1b, #111);
-	border: 1px solid #000;
 	border-radius: 5px;
-	box-shadow: inset 0 0 0 1px #272727;
 	display: inline-block;
 	font-size: 0px;
 
@@ -535,7 +523,8 @@ ul, ol {
     {
         height: 17%;
         display: block;
-    }.previsionDia
+    }
+    .previsionDia
     {
         display: inline-block;
         line-height: 1;
@@ -558,4 +547,11 @@ ul, ol {
         margin: auto;
     }
 
+}
+@media screen and (min-width: 1000px){
+    .tiempo
+        {
+            height: 7%;
+            display: block;
+        }
 }
