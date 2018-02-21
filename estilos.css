@@ -552,5 +552,9 @@ ul, ol {
         white-space: nowrap;
         margin-left: 0.3em;
     }
+    .nav li:last-child
+    {
+        width: 100%;
+    }
 
 }
