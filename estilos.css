@@ -241,7 +241,6 @@ ul, ol {
 }
 .nav > li {
     z-index: 200;
-
     float:left;
 }
 
@@ -257,7 +256,6 @@ ul, ol {
 
 .nav li a:hover {
     color: #5f5;
-    z-index: 200;
     background-color:#434343;
 }
 
@@ -268,18 +266,19 @@ ul, ol {
     position:absolute;
     min-width:140px;
 }
-
 .nav li:hover > ul {
     display:block;
 }
 
 .nav li ul li {
     position:relative;
+    max-width: 300px;
 }
 
 .nav li ul li ul {
     right:-140px;
     top:0px;
+    width: 20%;
 }
 
 

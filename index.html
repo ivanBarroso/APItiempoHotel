@@ -236,13 +236,21 @@
 
             consultarCiudad("Avila, españa");
 
+            $("#inicio").click(function(){
+                $("#btBuscar").text("Cargando...");
+                consultarCiudad("Avila, españa");
+                return false;
+            });
             $("#btBuscar").click(function(){
                 $("#btBuscar").text("Buscando...");
                 consultarCiudad($("#inputCiudad").val())
                 return false;
             });
             $(".paisEur").click(function(){
-                $(".paisEur").css("display:none");
+                $(".paisEur").css("z-index","-10");
+                $(".paisEur").css("display","none");
+                //$("#btBuscar").text("Cargando...");
+
                 consultarCiudad($(this).text());
                 
                 return false;
@@ -268,7 +276,7 @@
 <body>
     <div id="header">
             <ul class="nav">
-                <li><a href="index.html">Inicio</a></li>
+                <li><a id="inicio" href="">Inicio</a></li>
                 <li><a id="europa"href="">Europa</a>
                     <ul>
                         <li><a class="paisEur" href="">Albania, Tirana</a></li>
