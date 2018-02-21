@@ -92,7 +92,7 @@ padding: 0em 1em 1em 1em;
 }
 .tiempo
 {
-    height: 70px;
+    height: 12%;
     display: block;
 }
 .imagenTiempo
@@ -161,6 +161,7 @@ padding: 0em 1em 1em 1em;
     border: 1px solid #e9e9e9;
     border-radius: 1px;
     padding-top: 7px;   
+    padding-bottom: 17px;
     margin: 0;
     white-space: nowrap;
     margin-left: 0.3em;
@@ -273,8 +274,6 @@ ul, ol {
     top:0px;
 }
 
-
-@import url(http://fonts.googleapis.com/css?family=Cabin:400);
 
 .webdesigntuts-workshop {
 	background: #151515;
