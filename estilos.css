@@ -513,15 +513,18 @@ ul, ol {
         display: block;
         line-height: 1;
         text-align: center;
-        margin: 1px 5px 0;
-        height: 28px;
-        width: 28px;
+        margin: 1px 25px 0;
+        height: 32px;
+        width: 32px;
         white-space: nowrap;
         margin: auto;
     }
     .diaPeq
     {
         font-size: small;
+    }
+    #previsionDia7{
+        visibility:hidden;
     }
 
 }
