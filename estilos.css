@@ -256,6 +256,7 @@ ul, ol {
 }
 
 .nav li a:hover {
+    color: #5f5;
     z-index: 200;
     background-color:#434343;
 }
@@ -555,6 +556,7 @@ ul, ol {
     .nav li:last-child
     {
         width: 100%;
+        margin: auto;
     }
 
 }
