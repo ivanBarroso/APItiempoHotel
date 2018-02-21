@@ -94,8 +94,9 @@ padding: 0em 1em 1em 1em;
 }
 .tiempo
 {
-    height: 12%;
+    height: 18%;
     display: block;
+    margin-bottom: 5%;
 }
 .imagenTiempo
 {
