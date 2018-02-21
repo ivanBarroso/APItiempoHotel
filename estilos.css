@@ -516,7 +516,7 @@ ul, ol {
         display: block;
         line-height: 1;
         text-align: center;
-        margin: 1px 25px 0;
+        margin: 1px 15px 0;
         height: 32px;
         width: 32px;
         white-space: nowrap;
@@ -534,7 +534,7 @@ ul, ol {
     }
     .tiempo
     {
-        height: 18%;
+        height: 17%;
         display: block;
     }.previsionDia
     {
@@ -551,7 +551,7 @@ ul, ol {
         padding-bottom: 17px;
         margin: 0;
         white-space: nowrap;
-        margin-left: 0.3em;
+        margin-left: 0.1em;
     }
     .nav li:last-child
     {
