@@ -2,6 +2,7 @@ body {
     width: 100%;
     margin: 0 auto;
     font-family: Arial;
+    overflow:hidden;
 }
 #main {
     width: 20%;
@@ -525,6 +526,11 @@ ul, ol {
     }
     #previsionDia7{
         visibility:hidden;
+    }
+    .tiempo
+    {
+        height: 19%;
+        display: block;
     }
 
 }
