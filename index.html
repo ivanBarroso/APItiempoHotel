@@ -24,7 +24,7 @@
 
         peticionHttp.onreadystatechange = insertaContenido;
 
-        var consulta = 'select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="'+ciudad+', es")';
+        var consulta = 'select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="'+ciudad+'")';
         peticionHttp.open('GET', 'https://query.yahooapis.com/v1/public/yql?q='+consulta+'&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys', true);
         peticionHttp.send(null);
 
@@ -32,10 +32,13 @@
         {
             if (peticionHttp.readyState == 4 && peticionHttp.status == 200) 
             {
+                
+                $(".contenedor").remove();
+                
                 var respuesta_json = peticionHttp.responseText;
                 json_weather = eval("(" + respuesta_json + ")");
                 //ultima actualizacion 
-                console.log(json_weather);
+                //console.log(json_weather);
                 var fecha = json_weather.query.results.channel.item.condition.date;
                 //localizacion
                 var ciudad = json_weather.query.results.channel.location.city;
@@ -170,14 +173,84 @@
             $("#btBuscar").click(function(){
                 consultarCiudad($("#inputCiudad").val())
             });
+            $(".paisEur").click(function(){
+                consultarCiudad($(this).text());
+                return false;
+            });
+            $("#acercaDe").click(function(){
+                
+                return false;
+            });
+            $("#contacto").click(function(){
+                
+            });
         });
 });
     
 </script>
 
 <body>
+    <div id="header">
+            <ul class="nav">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="">Europa</a>
+                    <ul>
+                        <li><a class="paisEur" href="">Albania, Tirana</a></li>
+                        <li><a class="paisEur" href="">Alemania, Berlín</a></li>
+                        <li><a class="paisEur" href="">Andorra, Andorra</a></li>
+                        <li><a class="paisEur" href="">Austria, Viena</a></li>
+                        <li><a class="paisEur" href="">Bielorrusia, Minsk</a></li>
+                        <li><a class="paisEur" href="">Bélgica, Bruselas</a></li>
+                        <li><a class="paisEur" href="">Bosnia-Herzegovina, Sarajevo</a></li>
+                        <li><a class="paisEur" href="">Bulgaria, Sofía</a></li>
+                        <li><a class="paisEur" href="">Croacia, Zagreb</a></li>
+                        <li><a class="paisEur" href="">Dinamarca, Copenhague</a></li>
+                        <li><a class="paisEur" href="">Eslovaquia, Bratislava</a></li>
+                        <li><a class="paisEur" href="">Eslovenia, Liubliana</a></li>
+                        <li><a class="paisEur" href="">España, Madrid</a></li>
+                        <li><a class="paisEur" href="">Estonia, Tallin</a></li>
+                        <li><a class="paisEur" href="">Federación Rusa, Moscú</a></li>
+                        <li><a class="paisEur" href="">Finlandia, Helsinki</a></li>
+                        <li><a class="paisEur" href="">Francia, París</a></li>
+                        <li><a class="paisEur" href="">Grecia, Atenas</a></li>
+                        <li><a class="paisEur" href="">Hungría, Budapest</a></li>
+                        <li><a class="paisEur" href="">Irlanda, Dublín</a></li>
+                        <li><a class="paisEur" href="">Islandia, Reikiavik</a></li>
+                        <li><a class="paisEur" href="">Italia,Roma</a></li>
+                        <li><a class="paisEur" href="">Letonia, Riga</a></li>
+                        <li><a class="paisEur" href="">Liechtenstein, Vaduz</a></li>
+                        <li><a class="paisEur" href="">Lituania, Vilna</a></li>
+                        <li><a class="paisEur" href="">Luxemburgo, Luxemburgo</a></li>
+                        <li><a class="paisEur" href="">Macedonia, Skopje</a></li>
+                        <li><a class="paisEur" href="">Malta, La Valetta</a></li>
+                        <li><a class="paisEur" href="">Moldova, Chisinau</a></li>
+                        <li><a class="paisEur" href="">Mónaco, Mónaco</a></li>
+                        <li><a class="paisEur" href="">Noruega, Oslo</a></li>
+                        <li><a class="paisEur" href="">Países Bajos, Amsterdam</a></li>
+                        <li><a class="paisEur" href="">Polonia, Varsovia</a></li>
+
+                            <ul>
+                                <li><a href="">Submenu1</a></li>
+                                <li><a href="">Submenu2</a></li>
+                                <li><a href="">Submenu3</a></li>
+                                <li><a href="">Submenu4</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a id="acercaDe" href="">Acerca de</a>
+                    <ul>
+                        <li><a href="">Submenu1</a></li>
+                        <li><a href="">Submenu2</a></li>
+                        <li><a href="">Submenu3</a></li>
+                        <li><a href="">Submenu4</a></li>
+                    </ul>
+                </li>
+                <li><a id="contacto" href="mailto:barrosojimenezivan@gmail.com?subject=Te%20quiero%20comprar%20la%20pagina&body=1000%20€.">Contacto</a></li>
+                </ul>
+        </div>
     <div id="buscador">
-            <input id="inputCiudad" type="text" name="fname" placeholder="Ciudad">
+            <input id="inputCiudad" type="text" name="fname" placeholder="Buscar aqu&iacute;..." required   >
             <button id="btBuscar">Buscar</button><br>
     </div>    
     <div class="contenedorTiempo" id="contenedorTiempo"> 
