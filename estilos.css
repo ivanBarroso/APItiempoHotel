@@ -233,7 +233,10 @@ ul{
 ul, ol {
     list-style:none;
 }
-
+.nav li:last-child
+{
+    width: 200px;
+}
 .nav > li {
     z-index: 200;
 
