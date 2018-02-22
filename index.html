@@ -262,28 +262,29 @@
                 return false;
             });
 
-
             $("#europa").hover(function () {
                 $(".paisEur").show();
             })
             $(".paisEur").click(function () {
- 
+
                 $("#btBuscar").text("Cargando...");
                 consultarCiudad($(this).text());
                 $(".paisEur").hide();
                 return false;
             });
-            $("#acercaDe").click(function () {
-
-                return false;
-            });
+            
             $("#localizame").click(function () {
                 localizarUsuario();
-
-                return false;
             });
             $("#europa").click(function () {
                 return false;
+            });
+            $("#acercaDe").click(function () {
+                $("#informacion").show();
+                setTimeout(function() {
+                $("#informacion").fadeOut(2000);
+            },3000);
+            return false;
             });
         });
     });
@@ -402,20 +403,6 @@
             </li>
             <li>
                 <a id="acercaDe" href="">Acerca de</a>
-                <ul>
-                    <li>
-                        <a href="">Submenu1</a>
-                    </li>
-                    <li>
-                        <a href="">Submenu2</a>
-                    </li>
-                    <li>
-                        <a href="">Submenu3</a>
-                    </li>
-                    <li>
-                        <a href="">Submenu4</a>
-                    </li>
-                </ul>
             </li>
             <li>
                 <a id="contacto" href="mailto:barrosojimenezivan@gmail.com?subject=Te%20quiero%20comprar%20la%20pagina&body=1000%20€.">Contacto</a>
@@ -436,8 +423,11 @@
 
     </div>
     <div class="contenedorTiempo" id="contenedorTiempo">
-        <div id="resultado">
-        </div>
+    <div id="resultado"></div>
+    <div id="informacion"><p>Aplicación creada por Iván Barroso Jiménez para la asignatura desarrollo de interfaces 2018 en I.E.S. Virgen de la Paloma.
+    </p>
+    <p>Hace uso de librearías JQuery, Maps de Google, Places de Google (autocompletar), Yahoo Weather, Geo-Localización y librearías propias
+    </p></div>
 </body>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp2U_e27JmK8A06i6WDaFlh1YwQ6hh_jI&libraries=places&callback=initAutocomplete"></script>
 

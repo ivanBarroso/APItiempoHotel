@@ -560,3 +560,21 @@ ul, ol {
             display: block;
         }
 }
+#informacion {
+    background-color: #222922;
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    display: none;
+    z-index: 300;
+    opacity: 0.8;
+}
+#informacion p{
+    color: white;
+    font-size: 2em;
+    padding: 7%;
+}
