@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,146 +9,180 @@
     <link rel="stylesheet" href="estilos.css">
     <link rel="stylesheet" href="vectorImagenesTiempo.css">
 </head>
-    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp2U_e27JmK8A06i6WDaFlh1YwQ6hh_jI" async defer></script>
-    <script src="codigosCondiciones.js"></script>
-    <script src="millasAMetros.js"></script>
-    <script src="millasAKilometros.js"></script>
-    <script src="diasInglesAEsp.js"></script>
-    <script src="fahrenheitACelsius.js"></script>
-    <script type="text/javascript">
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="codigosCondiciones.js"></script>
+<script src="millasAMetros.js"></script>
+<script src="millasAKilometros.js"></script>
+<script src="diasInglesAEsp.js"></script>
+<script src="fahrenheitACelsius.js"></script>
+<script type="text/javascript">
+    //variables de autocompletar
+    var placeSearch, autocomplete;
+    var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+    };
+    function initAutocomplete() {
 
-    function consultarCiudad(ciudad) 
-    {
-        if (window.XMLHttpRequest) {peticionHttp = new XMLHttpRequest();}
-        else if (window.ActiveXObject) {peticionHttp = new ActiveXObject("Microsoft.XMLHTTP");}
+        autocomplete = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('inputCiudad')),
+            { types: ['geocode'] });
+
+        autocomplete.addListener('place_changed', fillInAddress);
+    }
+    function fillInAddress() {
+        var place = autocomplete.getPlace();
+
+
+        for (var i = 0; i < place.address_components.length; i++) {
+            var addressType = place.address_components[i].types[0];
+            if (componentForm[addressType]) {
+                var val = place.address_components[i][componentForm[addressType]];
+            }
+        }
+    }
+    //FIn de autocompletar
+    function consultarCiudad(ciudad) {
+        if (window.XMLHttpRequest) { peticionHttp = new XMLHttpRequest(); }
+        else if (window.ActiveXObject) { peticionHttp = new ActiveXObject("Microsoft.XMLHTTP"); }
 
         peticionHttp.onreadystatechange = insertaContenido;
 
-        var consulta = 'select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="'+ciudad+'")';
-        peticionHttp.open('GET', 'https://query.yahooapis.com/v1/public/yql?q='+consulta+'&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys', true);
+        var consulta = 'select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="' + ciudad + '")';
+        peticionHttp.open('GET', 'https://query.yahooapis.com/v1/public/yql?q=' + consulta + '&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys', true);
         peticionHttp.send(null);
 
-        function insertaContenido() 
-        {
-            if (peticionHttp.readyState == 4 && peticionHttp.status == 200) 
-            {
-                $("#btBuscar").text("Buscar");
-                $(".contenedor").remove();
-                
+        function insertaContenido() {
+            if (peticionHttp.readyState == 4 && peticionHttp.status == 200) {
                 var respuesta_json = peticionHttp.responseText;
                 json_weather = eval("(" + respuesta_json + ")");
-                //ultima actualizacion 
-                //console.log(json_weather);
-                var fecha = json_weather.query.results.channel.item.condition.date;
-                //localizacion
-                var ciudad = json_weather.query.results.channel.location.city;
-                var provincia = json_weather.query.results.channel.location.country;
-                var pais = json_weather.query.results.channel.location.region;
-                //viento
-                var sensacionT = json_weather.query.results.channel.wind.chill;
-                var direccion = json_weather.query.results.channel.wind.direction;
-                var velocidad = json_weather.query.results.channel.wind.speed;
+                $("#btBuscar").text("Buscar");
 
-                //atmosfera
-                var humedad = json_weather.query.results.channel.atmosphere.humidity;
-                var presion = json_weather.query.results.channel.atmosphere.pressure;
-                var visibilidad = json_weather.query.results.channel.atmosphere.visibility;
-
-                //orto y ocaso
-                var orto = json_weather.query.results.channel.astronomy.sunrise;
-                var ocaso = json_weather.query.results.channel.astronomy.sunset;
-
-                //localizacion
-                var lat = json_weather.query.results.channel.item.lat;
-                var lon = json_weather.query.results.channel.item.long;
-
-                //condicion 
-                var condicionCod = json_weather.query.results.channel.item.condition.code;
-                var condicionTex = arrayCondiciones[condicionCod];
-
-                var temperatura = fahrenheitACelsius(json_weather.query.results.channel.item.condition.temp);
-
-                //Siguientes 10 dias
-                var prevision = new Array();
-                cantiDiasPrevision = json_weather.query.results.channel.item.forecast.length;
-                for(var i = 0; i<cantiDiasPrevision; i++)
-                {
-                    prevision[i] = new Array();
-                    prevision[i].codigo = json_weather.query.results.channel.item.forecast[i].code;
-                    prevision[i].fecha = json_weather.query.results.channel.item.forecast[i].date;
-                    prevision[i].dia = diaAEsp(json_weather.query.results.channel.item.forecast[i].day);
-                    prevision[i].maximaT = fahrenheitACelsius(json_weather.query.results.channel.item.forecast[i].high);
-                    prevision[i].minimaT = fahrenheitACelsius(json_weather.query.results.channel.item.forecast[i].low);
+                if (json_weather.query.count == 0) {
+                    alert("Error en la consulta, no se puede localizar");
                 }
-               /* $('<h1>').text(ciudad + ", "+provincia+", "+pais).appendTo('#main');
-                $('<h2>').text('Fecha: ').appendTo('#main');
-                $('#main').append(json_weather.query.results.channel.item.condition.date);
-                $('<h2>').text('Temperatura: '+temperatura).appendTo('#main');
-                $('<h2>').text(condicionTex).appendTo('#main');
-*/
-                var spContenedor = $("<div>").addClass("contenedor");
-                $('#contenedorTiempo').append(spContenedor);
+                else {
+                    $(".contenedor").remove();
 
-                var divCiudad = $("<div>").addClass("ciudad ").text(ciudad);
-                var divFecha = $("<div>").addClass("textoGrisMedio").text(fecha);
-                var divCondicionText = $("<div>").addClass("textoGrisMedio").text(condicionTex);
+                    //ultima actualizacion 
+                    //console.log(json_weather);
+                    var fecha = json_weather.query.results.channel.item.condition.date;
+                    //localizacion
+                    var ciudad = json_weather.query.results.channel.location.city;
+                    var provincia = json_weather.query.results.channel.location.country;
+                    var pais = json_weather.query.results.channel.location.region;
+                    //viento
+                    var sensacionT = json_weather.query.results.channel.wind.chill;
+                    var direccion = json_weather.query.results.channel.wind.direction;
+                    var velocidad = json_weather.query.results.channel.wind.speed;
 
-                var divTiempo = $("<div>").addClass("tiempo").attr("id", "tiempo");
-                var divPrevisiones = $("<div>").addClass("previsiones").attr("id", "previsiones");
-                //Agregar el contenedor principal
-                $('.contenedor').append(divCiudad, divFecha, divCondicionText, divTiempo, divPrevisiones);
+                    //atmosfera
+                    var humedad = json_weather.query.results.channel.atmosphere.humidity;
+                    var presion = json_weather.query.results.channel.atmosphere.pressure;
+                    var visibilidad = json_weather.query.results.channel.atmosphere.visibility;
 
-                
-                var imgImagenTiempo = $("<div>").addClass("imagenTiempo").addClass(arrayIconos[condicionCod]);
-                var spTemperatura = $("<span>").addClass("textoTiempo").text(temperatura);
-                var spUnidadTemeperatura = $("<span>").addClass("unidadTemperatura").text("°C");
-                
-                var divResumen = $("<div>").addClass("resumen").attr("id", "resumen");
-                var spHumedad = $("<span>").addClass("textoGrisMedio noFlotar").text("Humedad");
-                var spHumedadNum = $("<span>").addClass("textoGrisMedio").text(humedad+"%").attr("id", "humedad");
-                var spPresion = $("<span>").addClass("textoGrisMedio noFlotar").text("Presión");
-                var spPresionNum = $("<span>").addClass("textoGrisMedio").text(presion+"in").attr("id", "presion");
-                var spVisibilidad = $("<span>").addClass("textoGrisMedio noFlotar").text("Visibilidad");
-                var spVisibilidadNum = $("<span>").addClass("textoGrisMedio").text(millasAKilometros(visibilidad)+" kilometros").attr("id", "presion");
-                
-                for(var i = 1; i< 8; i++)
-                {
-                    var spPrevisionDia = $("<div>").addClass("previsionDia").attr("id","previsionDia"+i);
-                    $("#previsiones").append(spPrevisionDia);
+                    //orto y ocaso
+                    var orto = json_weather.query.results.channel.astronomy.sunrise;
+                    var ocaso = json_weather.query.results.channel.astronomy.sunset;
 
-                    var spdiaPeq = $("<span>").addClass("diaPeq").text(prevision[i].dia);
-                    //var imgIconoPeq = $("<img>").addClass("iconoPeq").attr("src", "./iconos/003-cloudy-4.png");
-                    var imgIconoPeq = $("<div>").addClass("iconoPeq").addClass(arrayIconos[prevision[i].codigo]);
-                    var divTemPeq = $("<div>").addClass("tempPeq").attr("id", "tempPeq"+i);
+                    //localizacion
+                    var lat = json_weather.query.results.channel.item.lat;
+                    var lon = json_weather.query.results.channel.item.long;
 
-                    $(("#previsionDia"+i)).append(spdiaPeq, imgIconoPeq, divTemPeq);
+                    //condicion 
+                    var condicionCod = json_weather.query.results.channel.item.condition.code;
+                    var condicionTex = arrayCondiciones[condicionCod];
 
-                    var spdiaTempMin = $("<span>").addClass("tempPeqMin").text(prevision[i].minimaT+"°");
-                    var spdiaTemMax = $("<span>").addClass("tempPeqMax").text(prevision[i].maximaT+"°");
-                    $("#tempPeq"+i).append(spdiaTempMin, spdiaTemMax);
-                    $( "#previsionDia"+i ).on( {
-                            mouseenter: function(){
-                                $(this).css("color", "red").slideUp(1000).slideDown(600); 
+                    var temperatura = fahrenheitACelsius(json_weather.query.results.channel.item.condition.temp);
+
+                    //Siguientes 10 dias
+                    var prevision = new Array();
+                    cantiDiasPrevision = json_weather.query.results.channel.item.forecast.length;
+                    for (var i = 0; i < cantiDiasPrevision; i++) {
+                        prevision[i] = new Array();
+                        prevision[i].codigo = json_weather.query.results.channel.item.forecast[i].code;
+                        prevision[i].fecha = json_weather.query.results.channel.item.forecast[i].date;
+                        prevision[i].dia = diaAEsp(json_weather.query.results.channel.item.forecast[i].day);
+                        prevision[i].maximaT = fahrenheitACelsius(json_weather.query.results.channel.item.forecast[i].high);
+                        prevision[i].minimaT = fahrenheitACelsius(json_weather.query.results.channel.item.forecast[i].low);
+                    }
+                    /* $('<h1>').text(ciudad + ", "+provincia+", "+pais).appendTo('#main');
+                     $('<h2>').text('Fecha: ').appendTo('#main');
+                     $('#main').append(json_weather.query.results.channel.item.condition.date);
+                     $('<h2>').text('Temperatura: '+temperatura).appendTo('#main');
+                     $('<h2>').text(condicionTex).appendTo('#main');
+     */
+                    var spContenedor = $("<div>").addClass("contenedor");
+                    $('#contenedorTiempo').append(spContenedor);
+
+                    var divCiudad = $("<div>").addClass("ciudad ").text(ciudad);
+                    var divFecha = $("<div>").addClass("textoGrisMedio").text(fecha);
+                    var divCondicionText = $("<div>").addClass("textoGrisMedio").text(condicionTex);
+
+                    var divTiempo = $("<div>").addClass("tiempo").attr("id", "tiempo");
+                    var divPrevisiones = $("<div>").addClass("previsiones").attr("id", "previsiones");
+                    //Agregar el contenedor principal
+                    $('.contenedor').append(divCiudad, divFecha, divCondicionText, divTiempo, divPrevisiones);
+
+
+                    var imgImagenTiempo = $("<div>").addClass("imagenTiempo").addClass(arrayIconos[condicionCod]);
+                    var spTemperatura = $("<span>").addClass("textoTiempo").text(temperatura);
+                    var spUnidadTemeperatura = $("<span>").addClass("unidadTemperatura").text("°C");
+
+                    var divResumen = $("<div>").addClass("resumen").attr("id", "resumen");
+                    var spHumedad = $("<span>").addClass("textoGrisMedio noFlotar").text("Humedad");
+                    var spHumedadNum = $("<span>").addClass("textoGrisMedio").text(humedad + "%").attr("id", "humedad");
+                    var spPresion = $("<span>").addClass("textoGrisMedio noFlotar").text("Presión");
+                    var spPresionNum = $("<span>").addClass("textoGrisMedio").text(presion + "in").attr("id", "presion");
+                    var spVisibilidad = $("<span>").addClass("textoGrisMedio noFlotar").text("Visibilidad");
+                    var spVisibilidadNum = $("<span>").addClass("textoGrisMedio").text(millasAKilometros(visibilidad) + " kilometros").attr("id", "presion");
+
+                    for (var i = 1; i < 8; i++) {
+                        var spPrevisionDia = $("<div>").addClass("previsionDia").attr("id", "previsionDia" + i);
+                        $("#previsiones").append(spPrevisionDia);
+
+                        var spdiaPeq = $("<span>").addClass("diaPeq").text(prevision[i].dia);
+                        //var imgIconoPeq = $("<img>").addClass("iconoPeq").attr("src", "./iconos/003-cloudy-4.png");
+                        var imgIconoPeq = $("<div>").addClass("iconoPeq").addClass(arrayIconos[prevision[i].codigo]);
+                        var divTemPeq = $("<div>").addClass("tempPeq").attr("id", "tempPeq" + i);
+
+                        $(("#previsionDia" + i)).append(spdiaPeq, imgIconoPeq, divTemPeq);
+
+                        var spdiaTempMin = $("<span>").addClass("tempPeqMin").text(prevision[i].minimaT + "°");
+                        var spdiaTemMax = $("<span>").addClass("tempPeqMax").text(prevision[i].maximaT + "°");
+                        $("#tempPeq" + i).append(spdiaTempMin, spdiaTemMax);
+                        $("#previsionDia" + i).on({
+                            mouseenter: function () {
+                                $(this).css("color", "red").slideUp(1000).slideDown(600);
                                 $(this).css("background-color", "#123456");
-                                
+
                             },
-                            mouseleave: function(){
+                            mouseleave: function () {
                                 $(this).css("background-color", "#fff");
                             },
-                            click: function(){
+                            click: function () {
                                 $(this).css("background-color", "yellow");
                             }
                         });
+                    }
+
+
+                    $("#tiempo").append(imgImagenTiempo, spTemperatura, spUnidadTemeperatura, divResumen);
+                    $("#resumen").append(spHumedad, spHumedadNum, spPresion, spPresionNum, spVisibilidad, spVisibilidadNum);
+
+                    var divMapa = $("<div>").attr("id", "map");
+                    $('.contenedor').append(divMapa);
+                    initMap(lat, lon);
                 }
-                
-                
-                $("#tiempo").append(imgImagenTiempo, spTemperatura, spUnidadTemeperatura, divResumen);
-                $("#resumen").append(spHumedad, spHumedadNum, spPresion, spPresionNum, spVisibilidad, spVisibilidadNum);
-                
-                var divMapa = $("<div>").attr("id", "map");
-                $('.contenedor').append(divMapa);
-                initMap(lat, lon);
+
+            }
+            else if (peticionHttp.status == 400) {
+                alert("error");
+                $(".contenedor").text("Lo siento no ha sido posible encontrarlo");
             }
         }
     }
@@ -169,177 +204,257 @@
     }
 
     //geolocalizacion
-
-    function localizarUsuario   (){
-	if (navigator.geolocation)
-	{
-		navigator.geolocation.getCurrentPosition(function(objPosition)
-		{
-			var lon = objPosition.coords.longitude;
-			var lat = objPosition.coords.latitude;
+    function localizarUsuario() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (objPosition) {
+                var lon = objPosition.coords.longitude;
+                var lat = objPosition.coords.latitude;
 
 
-			var latlng = new google.maps.LatLng(lat, lon);
-			geocoder = new google.maps.Geocoder();
-			geocoder.geocode({"latLng": latlng}, function(results, status)
-			{
-				if (status == google.maps.GeocoderStatus.OK)
-				{
-					if (results[0])
-					{
-                        $("#inputCiudad").val(results[2].formatted_address+"");
-                        consultarCiudad(results[2].formatted_address);
-                        
+                var latlng = new google.maps.LatLng(lat, lon);
+                geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ "latLng": latlng }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            $("#inputCiudad").val(results[2].formatted_address + "");
+                            consultarCiudad(results[2].formatted_address);
+
+                        }
+                        else {
+                            alert("Direccion no encontrada")
+                        }
                     }
-					else
-					{
-						alert("Direccion no encontrada")
-					}
-				}
-				else
-				{
-					alert("Debes aceptar los permisos de geolocalización")
-				}
+                    else {
+                        alert("Debes aceptar los permisos de geolocalización")
+                    }
 
-			});
+                });
 
-		}, function(objPositionError)
-		{
-			switch (objPositionError.code)
-			{
-				case objPositionError.PERMISSION_DENIED:
-					content.innerHTML = "No se ha permitido el acceso a la posición del usuario.";
-				break;
-				case objPositionError.POSITION_UNAVAILABLE:
-					content.innerHTML = "No se ha podido acceder a la información de su posición.";
-				break;
-				case objPositionError.TIMEOUT:
-					content.innerHTML = "El servicio ha tardado demasiado tiempo en responder.";
-				break;
-				default:
-					content.innerHTML = "Error desconocido.";
-			}
-		}, {
-			maximumAge: 75000,
-			timeout: 15000
-		});
-	}
-	else
-	{
-		content.innerHTML = "Su navegador no soporta la API de geolocalización.";
-	}
+            }, function (objPositionError) {
+                switch (objPositionError.code) {
+                    case objPositionError.PERMISSION_DENIED:
+                        content.innerHTML = "No se ha permitido el acceso a la posición del usuario.";
+                        break;
+                    case objPositionError.POSITION_UNAVAILABLE:
+                        content.innerHTML = "No se ha podido acceder a la información de su posición.";
+                        break;
+                    case objPositionError.TIMEOUT:
+                        content.innerHTML = "El servicio ha tardado demasiado tiempo en responder.";
+                        break;
+                    default:
+                        content.innerHTML = "Error desconocido.";
+                }
+            }, {
+                    maximumAge: 75000,
+                    timeout: 15000
+                });
+        }
+        else {
+            content.innerHTML = "Su navegador no soporta la API de geolocalización.";
+        }
     };
     //fin de geolocalizacion
 
-    $(document).ready(function(){
-        $(document).ready(function(){
+    $(document).ready(function () {
+        $(document).ready(function () {
 
             consultarCiudad("Avila, españa");
 
-            $("#inicio").click(function(){
+            $("#inicio").click(function () {
                 $("#btBuscar").text("Cargando...");
                 consultarCiudad("Avila, españa");
                 return false;
             });
-            $("#btBuscar").click(function(){
+            $("#btBuscar").click(function () {
                 $("#btBuscar").text("Buscando...");
                 consultarCiudad($("#inputCiudad").val())
                 return false;
             });
-            $(".paisEur").click(function(){
-                $(".paisEur").css("z-index","-10");
-                $(".paisEur").css("display","none");
-                //$("#btBuscar").text("Cargando...");
 
+
+            $("#europa").hover(function () {
+                $(".paisEur").show();
+            })
+            $(".paisEur").click(function () {
+                //$(".paisEur").css("z-index","-10");
+                //$(".paisEur").css("display","none");
+                $("#btBuscar").text("Cargando...");
+                //$(".paisEur").css("visibility","hidden");
+                //Reparar esto... 
                 consultarCiudad($(this).text());
-                
+                $(".paisEur").hide();
+
+
+
                 return false;
             });
-            $("#acercaDe").click(function(){
-                
+            $("#acercaDe").click(function () {
+
                 return false;
             });
-            $("#localizame").click(function(){
+            $("#localizame").click(function () {
                 localizarUsuario();
-                
+
                 return false;
             });
-            $("#europa").click(function(){                
+            $("#europa").click(function () {
                 return false;
             });
-        
         });
-});
-    
+    });
+
+
 </script>
 
 <body>
     <div id="header">
-            <ul class="nav">
-                <li><a id="inicio" href="">Inicio</a></li>
-                <li><a id="europa"href="">Europa</a>
-                    <ul>
-                        <li><a class="paisEur" href="">Albania, Tirana</a></li>
-                        <li><a class="paisEur" href="">Alemania, Berlín</a></li>
-                        <li><a class="paisEur" href="">Andorra, Andorra</a></li>
-                        <li><a class="paisEur" href="">Austria, Viena</a></li>
-                        <li><a class="paisEur" href="">Bielorrusia, Minsk</a></li>
-                        <li><a class="paisEur" href="">Bélgica, Bruselas</a></li>
-                        <li><a class="paisEur" href="">Bosnia-Herzegovina, Sarajevo</a></li>
-                        <li><a class="paisEur" href="">Bulgaria, Sofía</a></li>
-                        <li><a class="paisEur" href="">Croacia, Zagreb</a></li>
-                        <li><a class="paisEur" href="">Dinamarca, Copenhague</a></li>
-                        <li><a class="paisEur" href="">Eslovaquia, Bratislava</a></li>
-                        <li><a class="paisEur" href="">Eslovenia, Liubliana</a></li>
-                        <li><a class="paisEur" href="">España, Madrid</a></li>
-                        <li><a class="paisEur" href="">Estonia, Tallin</a></li>
-                        <li><a class="paisEur" href="">Federación Rusa, Moscú</a></li>
-                        <li><a class="paisEur" href="">Finlandia, Helsinki</a></li>
-                        <li><a class="paisEur" href="">Francia, París</a></li>
-                        <li><a class="paisEur" href="">Grecia, Atenas</a></li>
-                        <li><a class="paisEur" href="">Hungría, Budapest</a></li>
-                        <li><a class="paisEur" href="">Irlanda, Dublín</a></li>
-                        <li><a class="paisEur" href="">Islandia, Reikiavik</a></li>
-                        <li><a class="paisEur" href="">Italia,Roma</a></li>
-                        <li><a class="paisEur" href="">Letonia, Riga</a></li>
-                        <li><a class="paisEur" href="">Liechtenstein, Vaduz</a></li>
-                        <li><a class="paisEur" href="">Lituania, Vilna</a></li>
-                        <li><a class="paisEur" href="">Luxemburgo, Luxemburgo</a></li>
-                        <li><a class="paisEur" href="">Macedonia, Skopje</a></li>
-                        <li><a class="paisEur" href="">Malta, La Valetta</a></li>
-                        <li><a class="paisEur" href="">Moldova, Chisinau</a></li>
-                        <li><a class="paisEur" href="">Mónaco, Mónaco</a></li>
-                        <li><a class="paisEur" href="">Noruega, Oslo</a></li>
-                        <li><a class="paisEur" href="">Países Bajos, Amsterdam</a></li>
-                        <li><a class="paisEur" href="">Polonia, Varsovia</a></li>
-                    </ul>
+        <ul class="nav">
+            <li>
+                <a id="inicio" href="">Inicio</a>
+            </li>
+            <li>
+                <a id="europa" href="">Europa</a>
+                <ul>
+                    <li>
+                        <a class="paisEur" href="">Albania, Tirana</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Alemania, Berlín</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Andorra, Andorra</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Austria, Viena</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Bielorrusia, Minsk</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Bélgica, Bruselas</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Bosnia-Herzegovina, Sarajevo</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Bulgaria, Sofía</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Croacia, Zagreb</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Dinamarca, Copenhague</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Eslovaquia, Bratislava</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Eslovenia, Liubliana</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">España, Madrid</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Estonia, Tallin</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Federación Rusa, Moscú</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Finlandia, Helsinki</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Francia, París</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Grecia, Atenas</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Hungría, Budapest</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Irlanda, Dublín</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Islandia, Reikiavik</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Italia,Roma</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Letonia, Riga</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Liechtenstein, Vaduz</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Lituania, Vilna</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Luxemburgo, Luxemburgo</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Macedonia, Skopje</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Malta, La Valetta</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Moldova, Chisinau</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Mónaco, Mónaco</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Noruega, Oslo</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Países Bajos, Amsterdam</a>
+                    </li>
+                    <li>
+                        <a class="paisEur" href="">Polonia, Varsovia</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a id="acercaDe" href="">Acerca de</a>
+                <ul>
+                    <li>
+                        <a href="">Submenu1</a>
+                    </li>
+                    <li>
+                        <a href="">Submenu2</a>
+                    </li>
+                    <li>
+                        <a href="">Submenu3</a>
+                    </li>
+                    <li>
+                        <a href="">Submenu4</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a id="contacto" href="mailto:barrosojimenezivan@gmail.com?subject=Te%20quiero%20comprar%20la%20pagina&body=1000%20€.">Contacto</a>
+            </li>
+            <li>
+                <a id="localizame" href="">Mi localización</a>
+                <li>
+                    <section class="webdesigntuts-workshop">
+                        <form action="" method="">
+                            <input id="inputCiudad" type="search" placeholder="Buscar...">
+                            <button id="btBuscar">Buscar</button>
+                        </form>
+                    </section>
                 </li>
-                <li><a id="acercaDe" href="">Acerca de</a>
-                    <ul>
-                        <li><a href="">Submenu1</a></li>
-                        <li><a href="">Submenu2</a></li>
-                        <li><a href="">Submenu3</a></li>
-                        <li><a href="">Submenu4</a></li>
-                    </ul>
-                </li>
-                <li><a id="contacto" href="mailto:barrosojimenezivan@gmail.com?subject=Te%20quiero%20comprar%20la%20pagina&body=1000%20€.">Contacto</a></li>
-                <li><a id="localizame" href="">Mi localización</a>
-                    <li><section class="webdesigntuts-workshop">
-                            <form action="" method="">		    
-                                <input id="inputCiudad" type="search" placeholder="Buscar...">		    	
-                                <button id="btBuscar">Buscar</button>
-                            </form>
-                        </section></li>
-            </ul>
-        </div>
+        </ul>
+    </div>
     <div id="buscador">
 
-    </div>    
-    <div class="contenedorTiempo" id="contenedorTiempo"> 
-    <div id="resultado"> 
     </div>
-        
-        
+    <div class="contenedorTiempo" id="contenedorTiempo">
+        <div id="resultado">
+        </div>
 </body>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp2U_e27JmK8A06i6WDaFlh1YwQ6hh_jI&libraries=places&callback=initAutocomplete"></script>
 
 </html>
