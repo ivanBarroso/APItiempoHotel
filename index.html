@@ -110,12 +110,6 @@
                         prevision[i].maximaT = fahrenheitACelsius(json_weather.query.results.channel.item.forecast[i].high);
                         prevision[i].minimaT = fahrenheitACelsius(json_weather.query.results.channel.item.forecast[i].low);
                     }
-                    /* $('<h1>').text(ciudad + ", "+provincia+", "+pais).appendTo('#main');
-                     $('<h2>').text('Fecha: ').appendTo('#main');
-                     $('#main').append(json_weather.query.results.channel.item.condition.date);
-                     $('<h2>').text('Temperatura: '+temperatura).appendTo('#main');
-                     $('<h2>').text(condicionTex).appendTo('#main');
-     */
                     var spContenedor = $("<div>").addClass("contenedor");
                     $('#contenedorTiempo').append(spContenedor);
 
@@ -146,7 +140,6 @@
                         $("#previsiones").append(spPrevisionDia);
 
                         var spdiaPeq = $("<span>").addClass("diaPeq").text(prevision[i].dia);
-                        //var imgIconoPeq = $("<img>").addClass("iconoPeq").attr("src", "./iconos/003-cloudy-4.png");
                         var imgIconoPeq = $("<div>").addClass("iconoPeq").addClass(arrayIconos[prevision[i].codigo]);
                         var divTemPeq = $("<div>").addClass("tempPeq").attr("id", "tempPeq" + i);
 
@@ -189,13 +182,11 @@
     function initMap(latitud, longitud) {
         var myLatLng = { lat: parseFloat(latitud), lng: parseFloat(longitud) };
 
-        // Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map'), {
             center: myLatLng,
             zoom: 10
         });
 
-        // Create a marker and set its position.
         var marker = new google.maps.Marker({
             map: map,
             position: myLatLng,
@@ -276,16 +267,10 @@
                 $(".paisEur").show();
             })
             $(".paisEur").click(function () {
-                //$(".paisEur").css("z-index","-10");
-                //$(".paisEur").css("display","none");
+ 
                 $("#btBuscar").text("Cargando...");
-                //$(".paisEur").css("visibility","hidden");
-                //Reparar esto... 
                 consultarCiudad($(this).text());
                 $(".paisEur").hide();
-
-
-
                 return false;
             });
             $("#acercaDe").click(function () {
@@ -302,7 +287,6 @@
             });
         });
     });
-
 
 </script>
 
