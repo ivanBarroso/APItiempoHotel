@@ -174,7 +174,6 @@
 
             }
             else if (peticionHttp.status == 400) {
-                alert("error");
                 $(".contenedor").text("Lo siento no ha sido posible encontrarlo");
             }
         }
@@ -200,7 +199,6 @@
             navigator.geolocation.getCurrentPosition(function (objPosition) {
                 var lon = objPosition.coords.longitude;
                 var lat = objPosition.coords.latitude;
-
 
                 var latlng = new google.maps.LatLng(lat, lon);
                 geocoder = new google.maps.Geocoder();
@@ -272,19 +270,20 @@
                 $(".paisEur").hide();
                 return false;
             });
-            
+
             $("#localizame").click(function () {
                 localizarUsuario();
+                return false;
             });
             $("#europa").click(function () {
                 return false;
             });
             $("#acercaDe").click(function () {
                 $("#informacion").show();
-                setTimeout(function() {
-                $("#informacion").fadeOut(2000);
-            },3000);
-            return false;
+                setTimeout(function () {
+                    $("#informacion").fadeOut(2000);
+                }, 3000);
+                return false;
             });
         });
     });
@@ -401,33 +400,39 @@
                     </li>
                 </ul>
             </li>
+
+            <li>
+                <a id="localizame" href="">Mi localización</a>
+            </li>
             <li>
                 <a id="acercaDe" href="">Acerca de</a>
             </li>
             <li>
-                <a id="contacto" href="mailto:barrosojimenezivan@gmail.com?subject=Te%20quiero%20comprar%20la%20pagina&body=1000%20€.">Contacto</a>
+                <a id="contacto" href="mailto:barrosojimenezivan@gmail.com?subject=Estoy interesado en adquirir tu sitio web&body=Te ofrezco la cantidad de €.">Contacto</a>
             </li>
             <li>
-                <a id="localizame" href="">Mi localización</a>
-                <li>
-                    <section class="webdesigntuts-workshop">
-                        <form action="" method="">
-                            <input id="inputCiudad" type="search" placeholder="Buscar...">
-                            <button id="btBuscar">Buscar</button>
-                        </form>
-                    </section>
-                </li>
+                <section class="webdesigntuts-workshop">
+                    <form action="" method="">
+                        <input id="inputCiudad" type="search" placeholder="Buscar...">
+                        <button id="btBuscar">Buscar</button>
+                    </form>
+                </section>
+            </li>
         </ul>
     </div>
     <div id="buscador">
 
     </div>
     <div class="contenedorTiempo" id="contenedorTiempo">
-    <div id="resultado"></div>
-    <div id="informacion"><p>Aplicación creada por Iván Barroso Jiménez para la asignatura desarrollo de interfaces 2018 en I.E.S. Virgen de la Paloma.
-    </p>
-    <p>Hace uso de librearías JQuery, Maps de Google, Places de Google (autocompletar), Yahoo Weather, Geo-Localización y librearías propias
-    </p></div>
+        <div id="resultado"></div>
+        <div id="informacion">
+            <p>Aplicación creada por Iván Barroso Jiménez para la asignatura desarrollo de interfaces 2018 en I.E.S. Virgen
+                de la Paloma.
+            </p>
+            <p>Hace uso de librerías JQuery, Maps de Google, Places de Google (autocompletar), Yahoo Weather, Geo-Localización
+                y librerías propias
+            </p>
+        </div>
 </body>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp2U_e27JmK8A06i6WDaFlh1YwQ6hh_jI&libraries=places&callback=initAutocomplete"></script>
 
