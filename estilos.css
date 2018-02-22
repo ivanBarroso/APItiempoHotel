@@ -513,6 +513,9 @@ ul, ol {
         position:relative;
         max-width: 200px;
     }
+    #aaccee rcaDe{
+        float:none;
+    }
     .diaPeq
     {
         font-size: small;
@@ -548,7 +551,6 @@ ul, ol {
     .nav li:last-child
     {
         width: 100%;
-        margin: auto;
     }#informacion {
         background-color: #222922;
         width: 90%;
