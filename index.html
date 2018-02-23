@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +35,6 @@
     }
     function fillInAddress() {
         var place = autocomplete.getPlace();
-
 
         for (var i = 0; i < place.address_components.length; i++) {
             var addressType = place.address_components[i].types[0];
@@ -122,7 +120,6 @@
                     //Agregar el contenedor principal
                     $('.contenedor').append(divCiudad, divFecha, divCondicionText, divTiempo, divPrevisiones);
 
-
                     var imgImagenTiempo = $("<div>").addClass("imagenTiempo").addClass(arrayIconos[condicionCod]);
                     var spTemperatura = $("<span>").addClass("textoTiempo").text(temperatura);
                     var spUnidadTemeperatura = $("<span>").addClass("unidadTemperatura").text("°C");
@@ -160,15 +157,12 @@
                         });
                     }
 
-
                     $("#tiempo").append(imgImagenTiempo, spTemperatura, spUnidadTemeperatura, divResumen);
                     $("#resumen").append(spHumedad, spHumedadNum, spPresion, spPresionNum, spVisibilidad, spVisibilidadNum);
-
                     var divMapa = $("<div>").attr("id", "map");
                     $('.contenedor').append(divMapa);
                     initMap(lat, lon);
                 }
-
             }
             else if (peticionHttp.status == 400) {
                 $(".contenedor").text("Lo siento no ha sido posible encontrarlo");
@@ -205,7 +199,6 @@
                             $("#inputCiudad").val(results[2].formatted_address + "");
                             $("#btBuscar").text("Lozalizando...")
                             consultarCiudad(results[2].formatted_address);
-
                         }
                         else {
                             alert("Direccion no encontrada")
@@ -214,9 +207,7 @@
                     else {
                         alert("Debes aceptar los permisos de geolocalización")
                     }
-
                 });
-
             }, function (objPositionError) {
                 switch (objPositionError.code) {
                     case objPositionError.PERMISSION_DENIED:
@@ -411,7 +402,7 @@
             <li>
                 <section class="webdesigntuts-workshop">
                     <form action="" method="">
-                        <input id="inputCiudad" type="search" placeholder="Buscar...">
+                        <input id="inputCiudad" type="search" autofocus placeholder="Buscar...">
                         <button id="btBuscar">Buscar</button>
                     </form>
                 </section>
