@@ -717,5 +717,6 @@ ul, ol {
     .tiempo
     {
         height: 33%;
+        background-color: red;
     }
 }
