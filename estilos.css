@@ -528,7 +528,7 @@ ul, ol {
     }
     .tiempo
     {
-        height: 17%;
+        height: 20%;
         display: block;
     }
     .previsionDia
@@ -568,7 +568,7 @@ ul, ol {
 @media screen and (min-width: 1000px){
     .tiempo
         {
-            height: 7%;
+            height: 15%;
             display: block;
         }
 }
