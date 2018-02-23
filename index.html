@@ -220,16 +220,16 @@
             }, function (objPositionError) {
                 switch (objPositionError.code) {
                     case objPositionError.PERMISSION_DENIED:
-                        content.innerHTML = "No se ha permitido el acceso a la posición del usuario.";
+                    alert("No se ha permitido el acceso a la posición del usuario.");
                         break;
                     case objPositionError.POSITION_UNAVAILABLE:
-                        content.innerHTML = "No se ha podido acceder a la información de su posición.";
+                    alert("No se ha podido acceder a la información de su posición.");
                         break;
                     case objPositionError.TIMEOUT:
-                        content.innerHTML = "El servicio ha tardado demasiado tiempo en responder.";
+                        alert("El servicio ha tardado demasiado tiempo en responder.");
                         break;
                     default:
-                        content.innerHTML = "Error desconocido.";
+                    alert("Error desconocido.");
                 }
             }, {
                     maximumAge: 75000,
