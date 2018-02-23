@@ -112,7 +112,7 @@
                     $('#contenedorTiempo').append(spContenedor);
 
                     var divCiudad = $("<div>").addClass("ciudad ").text(ciudad);
-                    var divFecha = $("<div>").addClass("textoGrisMedio").text(fecha);
+                    var divFecha = $("<div>").addClass("textoGrisMedio").text(fecha.substr(5, fecha.length));
                     var divCondicionText = $("<div>").addClass("textoGrisMedio").text(condicionTex);
 
                     var divTiempo = $("<div>").addClass("tiempo").attr("id", "tiempo");
