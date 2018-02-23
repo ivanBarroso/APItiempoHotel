@@ -490,7 +490,23 @@ ul, ol {
 		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
     }
 }
-
+#informacion {
+    background-color: #222922;
+    width: 60%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    display: none;
+    z-index: 300;
+    opacity: 0.8;
+}
+#informacion p{
+    color: white;
+    font-size: 2em;
+    padding: 7%;
+}
 
 @media screen and (max-width: 600px){
 
@@ -563,7 +579,11 @@ ul, ol {
         z-index: 300;
         opacity: 0.8;
     }
-
+    #informacion p{
+        color: white;
+        font-size: 1em;
+        padding: 5%;
+    }
 }
 @media screen and (min-width: 1000px){
     .tiempo
@@ -571,21 +591,4 @@ ul, ol {
             height: 15%;
             display: block;
         }
-}
-#informacion {
-    background-color: #222922;
-    width: 60%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    display: none;
-    z-index: 300;
-    opacity: 0.8;
-}
-#informacion p{
-    color: white;
-    font-size: 2em;
-    padding: 7%;
 }
