@@ -635,11 +635,6 @@ ul, ol {
     #previsionDia7{
         visibility:hidden;
     }
-    .tiempo
-    {
-        height: 20%;
-        display: block;
-    }
     .previsionDia
     {
         display: inline-block;
@@ -685,11 +680,11 @@ ul, ol {
     }
     .textoTiempo
     {
-        font-size: 5em;
+        font-size: 3.5em;
     }
     .unidadTemperatura
     {
-        font-size: 2em;
+        font-size: 1em;
     }
     #map {
         width: 90%;
@@ -699,6 +694,10 @@ ul, ol {
         float: left;
         top:120px;
     
+    }
+    .tiempo
+    {
+        height: 28%;
     }
     
 }
