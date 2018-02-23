@@ -3,6 +3,8 @@ body {
     margin: 0 auto;
     font-family: Arial;
     overflow:hidden;
+    overflow : -moz-scrollbars-vertical;
+    overflow-y : scroll;
 }
 #main {
     width: 20%;
